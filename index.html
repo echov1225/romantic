@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ROMANTIC</title>
+	<link rel="stylesheet" type="text/css" href="css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="css/pageA.css">
+	<script type="text/javascript" src="js/jquery-2.1.4.js"></script>
+	<script type="text/javascript" src="js/jquery.transit.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/Swipe.js"></script>
+
+	<style type="text/css">
+		.slowWalk 
+		{
+			/* 规定 @keyframes 动画的名称 */
+			-webkit-animation-name: person-slow;
+			/* 规定动画完成一个周期的时间。默认0 */
+			-webkit-animation-duration: 950ms;
+			/* 规定动画被播放的次数。默认1，infinite(循环播放) */
+			-webkit-animation-iteration-count: infinite;
+			/* 动画切换的方式是一帧一帧的变化 */
+			-webkit-animation-timing-function: steps(1, start);
+
+			-moz-animation-name: person-slow;
+			-moz-animation-duration: 950ms;
+			-moz-animation-iteration-count: infinite;
+			-moz-animation-timing-function: steps(1, start);
+
+			-ms-animation-name: person-slow;
+			-ms-animation-duration: 950ms;
+			-ms-animation-iteration-count: infinite;
+			-ms-animation-timing-function: steps(1, start);
+		}
+
+		/* 普通慢走 */
+		@-webkit-keyframes person-slow 
+		{
+			0% {
+				background-position: -0px -0px;
+			}
+			25% {
+				background-position: -150px -0px;
+			}
+			50% {
+				background-position: -300px -0px;
+			}
+			75% {
+				background-position: -460px -0px;
+			}
+			100% {
+				background-position: -0px -0px;
+			}
+		}
+		@-moz-keyframes person-slow 
+		{
+			0% {
+				background-position: -0px -0px;
+			}
+			25% {
+				background-position: -150px -0px;
+			}
+			50% {
+				background-position: -300px -0px;
+			}
+			75% {
+				background-position: -460px -0px;
+			}
+			100% {
+				background-position: -0px -0px;
+			}
+		}
+		@-ms-keyframes person-slow 
+		{
+			0% {
+				background-position: -0px -0px;
+			}
+			25% {
+				background-position: -150px -0px;
+			}
+			50% {
+				background-position: -300px -0px;
+			}
+			75% {
+				background-position: -460px -0px;
+			}
+			100% {
+				background-position: -0px -0px;
+			}
+		}
+
+		/* 暂停动画 */
+		.pause-walk 
+		{
+			-webkit-animation-play-state: paused;
+			-moz-animation-play-state: paused;
+			-ms-animation-play-state: paused;
+		}
+	</style>
+</head>
+<body>
+	<div id="content">
+		<ul class="content-wrap">
+			<li>
+				<div class="a_background">
+					<div class="a_background_top"></div>
+					<div class="a_background_middle"></div>
+					<div class="a_background_bottom"></div>
+				</div>
+			</li>
+			<li>页面2</li>
+			<li>页面3</li>
+		</ul>
+		<div class="button">
+			<button>点击开始动画</button>
+			<button>点击暂停动画</button>
+		</div>
+        <div id="boy" class="charector"></div>
+	</div>
+	<script type="text/javascript">
+		var swipe = Swipe($("#content"));
+		
+		/**
+		 * 获取对象的高度和top值
+		 * @param  {[type]} className [description]
+		 * @return {[type]}           [description]
+		 */
+		var getValue = function(className) {
+			var $ele = $("" + className + "");
+			return {
+				height: $ele.height(),
+				top: $ele.position().top
+			};
+		}
+
+		/**
+		 * 获取路的Y坐标轴的top值
+		 * @return {[type]} [description]
+		 */
+		var pathY = function() {
+			var pathDate = getValue(".a_background_middle");
+			return pathDate.top + pathDate.height / 2;
+		}
+
+		var $boy = $("#boy");
+		$boy.css({
+			top: pathY() - $boy.height() + 20
+		});
+
+		//==============================
+		//		增加精灵动画			
+		//==============================
+		$('button:first').click(function() {
+			//增加走路的CSS3关键帧规则
+			$boy.addClass('slowWalk').removeClass('pause-walk').transition({'left': $('#content').width() + 'px'}, 10000, 'linear', function() {});
+			swipe.scrollTo($('#content').width() * 2, 5000);
+		});
+		$('button:last').click(function() {
+			$boy.addClass('pause-walk');
+			$boy.css({
+				left: $boy.position().left
+			});
+		});
+	</script>
+</body>
+</html>

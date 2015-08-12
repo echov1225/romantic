@@ -1,0 +1,32 @@
+.a_background
+{
+	width: 100%;
+	height: 100%;
+	background: #333;
+}
+
+.a_background > *
+{
+	width: 100%;
+}
+
+.a_background_top 
+{
+	height: 71.6%;
+	background: url(../images/background/a_background_top.png);
+	background-size: 100% 100%;
+}
+
+.a_background_middle
+{
+	height: 13.1%;
+	background: url(../images/background/a_background_middle.png);
+	background-size: 100% 100%;
+}
+
+.a_background_bottom
+{
+	height: 15.3%;
+	background: url(../images/background/a_background_botton.png);
+	background-size: 100% 100%;
+}
